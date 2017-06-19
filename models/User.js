@@ -1,36 +1,29 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bookmarks = require('./bookmarks');
 
 const userSchema = new mongoose.Schema({
-  //userid: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
 
   facebook: String,
-  //^ID from fb,
-  // twitter: String,
-  // google: String,
-  // github: String,
+  twitter: String,
+  google: String,
+  github: String,
   instagram: String,
-  // linkedin: String,
-  // steam: String,
+  linkedin: String,
+  steam: String,
   tokens: Array,
-  ///access token for fb, IG,
 
   profile: {
     name: String,
     gender: String,
     location: String,
-    // website: String,
-    //picture: String,
-  },
-
-  bookmarks: [{ type: Schema.Types.ObjectId, ref: 'bookmarks' }]
+    website: String,
+    picture: String
+  }
 }, { timestamps: true });
 
 /**

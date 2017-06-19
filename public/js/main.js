@@ -21,7 +21,6 @@ function initMap() {
   navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 }
 
-
 $(document).ready(function() {
 
   // Place JavaScript code here...
