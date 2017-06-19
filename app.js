@@ -116,6 +116,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 
 /**
  * Primary app routes.
+ get function (trigger, function to be called in the controller-see controllers folder);
  */
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
