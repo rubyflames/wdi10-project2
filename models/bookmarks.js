@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const User = require('./User');
 const Schema = mongoose.Schema;
 //const User = require ('./User');
 

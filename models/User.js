@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const bookmarks = require('bookmarks');
+const bookmarks = require('./bookmarks');
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
     gender: String,
     location: String,
     website: String,
-    picture: String
-    bookmarks: [{ type: Schema.Types.ObjectId, ref: 'bookmarks' }]
+    picture: String,
+    bookmark: [{ type: Schema.Types.ObjectId, ref: 'bookmarks' }]
   }
 }, { timestamps: true });
 
