@@ -71,10 +71,10 @@ textarea {
 
 // Maps
 // -------------------------
-html, body, .container-fluid, .row {
+html, body, .container-fluid, .container, .row {
   height: 100%;
 }
 #map {
   height: 100%;
-  position: relative;
+
 }
