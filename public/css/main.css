@@ -8962,10 +8962,19 @@ html, body, .container-fluid, .container, .row {
 
 #overlay {
   height: 70%;
-  width: 40%;
+  width: 25%;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 0;
+  top: 60px;
+  left: 0;
+  z-index: 99;
+}
+#placeinfo {
+  height: 70%;
+  width: 25%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 60px;
   left: 0;
   z-index: 99;
 }
