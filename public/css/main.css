@@ -8976,5 +8976,5 @@ html, body, .container-fluid, .container, .row {
   position: absolute;
   top: 60px;
   left: 0;
-  z-index: 99;
+  z-index: 100;
 }
