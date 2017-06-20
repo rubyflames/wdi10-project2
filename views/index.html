@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      #wrapper { position: relative; }
+      #map {
+        height: 1500px;
+        width: 1500px;
+        background-color: red}
+      .overlay { position: absolute; top: 10px; left: 10px; z-index: 99; }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div id="wrapper">
+          <div id="map">
+
+          </div>
+          <div class="col-sm-4 overlay">
+            <span>test 123</span>
+          </div>
+          <div class="col-sm-8 overlay">
+            <span>100 nd 1</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <script async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDoy3_ZyjqbrSSJPRhQ2WO0jkboFlmNGGk&callback=initMap'></script></script>
+    <script>
+    function locationSuccess(position) {
+      console.log('Location success')
+      var current = {lat: position.coords.latitude, lng: position.coords.longitude};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: current
+      });
+
+      var marker = new google.maps.Marker({
+        position: current,
+        map: map
+      });
+      </script>
+  </body>
+</html>
