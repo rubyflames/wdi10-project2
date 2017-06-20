@@ -8972,7 +8972,7 @@ html, body, .container-fluid, .container, .row {
 #placeinfo {
   height: 70%;
   width: 25%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(256, 256, 256, 0.5);
   position: absolute;
   top: 60px;
   left: 0;
