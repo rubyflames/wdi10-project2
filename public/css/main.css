@@ -8960,7 +8960,7 @@ html, body, .container-fluid, .container, .row {
   position: relative;
 }
 
-#overlay1, #overlay2 {
+#overlay1, #placeinfo {
   display: inline;
   height: 70%;
   width: 25%;
@@ -8970,12 +8970,43 @@ html, body, .container-fluid, .container, .row {
   left: 0;
   z-index: 99;
 }
-#placeinfo {
-  height: 70%;
-  width: 25%;
-  background-color: rgba(256, 256, 256, 0.3);
+#overlay2 {
+  height: 10%;
+  width: 100%;
   position: absolute;
   top: 60px;
   left: 0;
   z-index: 99;
+}
+
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
 }

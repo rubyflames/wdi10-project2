@@ -2,10 +2,16 @@ extends layout
 
 block content
   .row
-    #overlay1.col-sm-4
-      span
-        TEST
-    #overlay2.col-sm-4.col-sm-offset-8
-      span
-        NOM LATER
+    #overlay1.col-sm-3
+      span TEST
+    #overlay2.col-sm-offset-3.col-sm-6
+      h2 Custom search field
+      #custom-search-input
+        .input-group.col-md-12
+          input.form-control.input-lg(type='text', placeholder='Find noms')
+          span.input-group-btn
+            button.btn.btn-info.btn-lg(type='button')
+              i.glyphicon.glyphicon-search
+    #placeinfo.col-sm-offset-9.col-sm-3
+      span NOM LATER
     #map.col-sm-12
