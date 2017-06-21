@@ -8960,7 +8960,8 @@ html, body, .container-fluid, .container, .row {
   position: relative;
 }
 
-#overlay {
+#overlay1, #overlay2 {
+  display: inline;
   height: 70%;
   width: 25%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -8972,9 +8973,9 @@ html, body, .container-fluid, .container, .row {
 #placeinfo {
   height: 70%;
   width: 25%;
-  background-color: rgba(256, 256, 256, 0.5);
+  background-color: rgba(256, 256, 256, 0.3);
   position: absolute;
   top: 60px;
   left: 0;
-  z-index: 100;
+  z-index: 99;
 }
