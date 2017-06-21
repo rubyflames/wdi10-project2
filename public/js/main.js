@@ -1,3 +1,8 @@
+var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 17,
+  center: current
+};
+
 function locationSuccess(position) {
   console.log('Location success')
   var current = {lat: position.coords.latitude, lng: position.coords.longitude};
@@ -10,6 +15,37 @@ function locationSuccess(position) {
     position: current,
     map: map
   });
+
+
+var service;
+var infowindow;
+
+function initialize() {
+  var searchlocation = new map.LatLng();
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 17,
+    center: current
+    });
+
+  var request = {
+    location: searchlocation,
+    radius: '500',
+    query: 'restaurant'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      createMarker(results[i]);
+    }
+  }
+}
 
   // var contentString = '<div id="content">'+
   //     '<div id="siteNotice">'+
