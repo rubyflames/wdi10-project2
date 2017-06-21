@@ -1,7 +1,7 @@
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 17,
   center: current
-};
+});
 
 function locationSuccess(position) {
   console.log('Location success')
@@ -16,17 +16,23 @@ function locationSuccess(position) {
     map: map
   });
 
+  var contentString = '<div>' + marker.getPosition() + '</div>'
+  infowindow = new google.maps.InfoWindow({
+    content: contentString
+  })
+  console.log(marker.getPosition(), 'getposition')
+  console.log(marker.position, 'position')
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+}
+
 
 var service;
 var infowindow;
 
 function initialize() {
-  var searchlocation = new map.LatLng();
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17,
-    center: current
-    });
+  var searchlocation = map.LatLng();
 
   var request = {
     location: searchlocation,
@@ -72,10 +78,6 @@ function callback(results, status) {
   // content: contentString
   // });
 
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
-}
 
 function locationError() {
   console.log('Cound not get location')
@@ -319,9 +321,9 @@ $(function() {
     })
     .done(function( data ) {
         store = data;
-        data.forEach(function(candy){
-            createProductRow(candy);
-        });
+        // data.forEach(function(candy){
+        //     createProductRow(candy);
+        // });
     });
 
     $('#editform').on('shown.bs.modal', function () {
