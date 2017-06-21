@@ -1,9 +1,6 @@
 {
-    "html_attributions": [
-        "Listings by <a href=\"http://www.openrice.com/\">OpenRice</a>"
-    ],
-    "next_page_token": "CoQC9wAAAD4LJWpnemsdIaMrSfKdw9E5JiHLyTVg18u42SCCtY-g6PsMkNUut4ElycpTCx_HZlGJiYNWQtJS-hmxfKNEJmzsBu7qz8lJPYj934k-ZIttjvJIcs9ZAWlurhDZjkya6Lqq1bSTI5Scw6BigYc6dNRLLoWPE_bh2FaGxamHxXojZl7JXWigxcyYsXbnlIuxI3jULP6ZJcmE9BXZr-wDuKCDO9TnZLpfHw-tKaDzNg7trs4ioeeXVaCgZ_6FtEyeWg8R3Hg96el3QakAIOUuMJL9cTwCR7g6u0inn1OstVkwJxNxfMqCU1MNmpg3WmGmXJMRE4i-0uTuUy6sq1pyKGcSEKXEFU1-CR7gGHYiu-A2XVIaFHahP5c2IK_kqVl_Gm2euMExEfPK",
-    "results": [
+    "model": "Restaurant",
+    "documents": [
         {
             "formatted_address": "583 Orchard Rd, Singapore 238884",
             "geometry": {
