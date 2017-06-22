@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   .row
     #map.col-sm-12
     #overlay1.col-sm-3
@@ -15,3 +16,6 @@ block content
               i.glyphicon.glyphicon-search
     #placeinfo.col-sm-offset-9.col-sm-3
       span NOM LATER
+      ul
+        for restaurant in restaurants
+          li=restaurant.name

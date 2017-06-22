@@ -8952,7 +8952,7 @@ html, body, .container-fluid, .container, .row {
   position: relative;
 }
 
-#overlay1, #placeinfo {
+#overlay1 {
   display: inline;
   height: 70%;
   width: 25%;
@@ -8970,6 +8970,17 @@ html, body, .container-fluid, .container, .row {
   top: 60px;
   left: 10%;
   z-index: 99;
+}
+#placeinfo {
+  display: inline;
+  height: 70%;
+  width: 25%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 99;
+  overflow: auto;
 }
 
 #custom-search-input{
