@@ -8961,6 +8961,7 @@ html, body, .container-fluid, .container, .row {
   top: 60px;
   left: 0;
   z-index: 99;
+  overflow: auto;
 }
 #overlay2 {
   display: inline;
