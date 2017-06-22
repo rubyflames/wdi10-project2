@@ -1,10 +1,8 @@
 const User = require('../models/User');
+const Bookmark = require('../models/bookmarks')
 
 let bookmarkslistDefault = [
-  {id: "1", name: "Chewing Gum" , color: "Red", price: 12  },
-  {id: "2", name: "Pez"         , color: "Green", price: 10 },
-  {id: 3, name: "Marshmallow" , color: "Pink", price: 8  },
-  {id: 4, name: "Bookmarks Stick" , color: "Blue", price: 6   }
+  {id: "77bb1088bb13f4569d172f10b120357bee594f49", name: "On The Table" , formatted_address: "118 Pasir Panjang Rd, Singapore 118541", comments: ":)"  }
 ];
 
 let bookmarkslist = [];
@@ -27,15 +25,30 @@ exports.list = () => {
 /*
  *  Create bookmarks ( Crud )
  */
-exports.create = (bookmarks) => {
-    bookmarks.id = uuidV4();
-    bookmarkslist.push(bookmarks);
-    return bookmarks;
+exports.create = (req, res) => {
+    let newBookmark = new Bookmark()
+    newBookmark.user = req.body.user
+    newBookmark.restaurant = req.body.restaurant_id
+    newBookmark.name = req.body.name
+    newBookmark.formatted_address = req.body.formatted_address
+
+    newBookmark.save((err) => {
+      if (err) return res.json({message:err})
+      res.send('user created')
+    })
 }
 
 /*
  *  Get bookmarks ( cRud )
  */
+
+exports.getAll = (req, res) => {
+  Bookmark.find((err, bookmark) => {
+    if (err) return res.send(err)
+    res.send(bookmark)
+  })
+}
+
 exports.get = (id) => {
 
   var bookmarks = bookmarkslist.filter((bookmarks) => {

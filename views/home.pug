@@ -6,13 +6,15 @@ block content
     #map.col-sm-12
     #overlay1.col-sm-3
       h3 Your Saved Noms
-      script#productRowTpl(type='text/template').
-        <div class="row product" data-id="{{Id}}">
-          <div class="col-md-2 eateryname">{{Name}}</div>
-          <div class="col-md-2 address">{{Address}}</div>
-          <div class="col-md-1 delete">
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
+      #productRowTpl
+        .row.product(data-id='{{Id}}')
+          .col-md-3.eateryname {{Name}}
+          .col-md-3.address {{Address}}
+          .form-group
+            label(for='Notes') Notes
+            input#color.form-control(type='text', placeholder='My Comments')
+          .col-md-1.delete
+            button.btn.btn-danger(type='button') Delete
     #overlay2.col-sm-offset-3.col-sm-6
       h3 NOM-ADD: Add Now, Nom Later
       #custom-search-input
@@ -26,5 +28,6 @@ block content
         for restaurant in restaurants
           ul
             li=restaurant.name
+            li=restaurant.formatted_address
             li=restaurant.geometry.location.lat
             li=restaurant.geometry.location.lng
