@@ -5,7 +5,14 @@ block content
   .row
     #map.col-sm-12
     #overlay1.col-sm-3
-      span
+      h3 Your Saved Noms
+      script#productRowTpl(type='text/template').
+        <div class="row product" data-id="{{Id}}">
+          <div class="col-md-2 eateryname">{{Name}}</div>
+          <div class="col-md-2 address">{{Address}}</div>
+          <div class="col-md-1 delete">
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
     #overlay2.col-sm-offset-3.col-sm-6
       h3 NOM-ADD: Add Now, Nom Later
       #custom-search-input
@@ -15,7 +22,7 @@ block content
             button.btn.btn-info.btn-lg(type='button')
               i GO!
     #placeinfo.col-sm-offset-9.col-sm-3
-      span NOM LATER
+      span Place for noms
         for restaurant in restaurants
           ul
             li=restaurant.name

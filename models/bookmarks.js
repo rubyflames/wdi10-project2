@@ -2,12 +2,15 @@ const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = require('./User');
+const restaurant = require('./restaurant');
 const Schema = mongoose.Schema;
 //const User = require ('./User');
 
 const bookmarks = new mongoose.Schema({
   user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   // ^ to ref mongoDB reference of the user
+  id: [{ type: Schema.Types.ObjectId, ref: 'restaurant' }],
+
   eateryid: { type: String, unique: true },
   address: {
     street: String,

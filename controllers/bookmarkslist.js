@@ -1,4 +1,4 @@
-const uuidV4 = require('uuid/v4');
+const User = require('../models/User');
 
 let bookmarkslistDefault = [
   {id: "1", name: "Chewing Gum" , color: "Red", price: 12  },
@@ -11,7 +11,7 @@ let bookmarkslist = [];
 
 let init = () => {
   bookmarkslistDefault.forEach((bookmarks) => {
-    bookmarks.id = uuidV4();
+    bookmarks.id = User();
     bookmarkslist.push(bookmarks);
   });
 }
