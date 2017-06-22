@@ -5,7 +5,7 @@ block content
   .row
     #map.col-sm-12
     #overlay1.col-sm-3
-      span TEST
+      span
     #overlay2.col-sm-offset-3.col-sm-6
       h3 NOM-ADD: Add Now, Nom Later
       #custom-search-input
@@ -13,9 +13,11 @@ block content
           input.form-control.input-lg(type='text', placeholder='Find noms')
           span.input-group-btn
             button.btn.btn-info.btn-lg(type='button')
-              i.glyphicon.glyphicon-search
+              i GO!
     #placeinfo.col-sm-offset-9.col-sm-3
       span NOM LATER
-      ul
         for restaurant in restaurants
-          li=restaurant.name
+          ul
+            li=restaurant.name
+            li=restaurant.geometry.location.lat
+            li=restaurant.geometry.location.lng

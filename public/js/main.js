@@ -1,57 +1,127 @@
-var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 17,
-  center: current
-});
+// var map = new google.maps.Map(document.getElementById('map'), {
+//   zoom: 17,
+//   center: current
+// });
 
-function locationSuccess(position) {
-  console.log('Location success')
-  var current = {lat: position.coords.latitude, lng: position.coords.longitude};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17,
-    center: current
-  });
-
-  var marker = new google.maps.Marker({
-    position: current,
-    map: map
-  });
-
-  var contentString = '<div>' + marker.getPosition() + '</div>'
-  infowindow = new google.maps.InfoWindow({
-    content: contentString
-  })
-  console.log(marker.getPosition(), 'getposition')
-  console.log(marker.position, 'position')
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
-}
-
-
-var service;
-var infowindow;
-
-function initialize() {
-  var searchlocation = map.LatLng();
-
-  var request = {
-    location: searchlocation,
-    radius: '500',
-    query: 'restaurant'
+// Get user location
+function initMap() {
+  // navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+  var map;
+  var markers = []
+  var bounds = new google.maps.LatLngBounds();
+  var mapOptions = {
+    mapTypeId: 'roadmap'
   };
 
-  service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
+  // Display map on page
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  map.setTilt(45);
+
+  // Multiple Markers
+  // use jquery to get all list items from window
+  // for each item, add a corresponding marker
+  itemArr = document.getElementById('placeinfo').getElementsByTagName('ul')
+  for (var i=0; i<itemArr.length;i++) {
+    var markerContent = itemArr[i].innerText.split('\n')
+    markerContent.pop()
+    markers.push(markerContent)
+  }
+
+  // Info window content
+  var infoWindowContent = []
+  for (var i in markers) {
+    infoWindowContent[i] = [
+      '<div class="info_content">' + '<h3>' + markers[i][0] + '</h3>' +
+      '<p>Description</p></div>'
+    ]
+  }
+
+  // Display multiple markers on a map
+  var infoWindow = new google.maps.InfoWindow(), marker, i
+  // Loop through to place marker on map
+  for (i = 0; i < markers.length; i++) {
+    var position = new google.maps.LatLng(parseFloat(markers[i][1]), parseFloat(markers[i][2]))
+    bounds.extend(position)
+    marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      title: markers[i][0]
+    })
+
+    // Allow each marker to have an info window
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infoWindow.setContent(infoWindowContent[i][0])
+        infoWindow.open(map, marker)
+      }
+    })(marker, i))
+
+    // automatically center map to fit all markers
+    map.fitBounds(bounds)
+  }
+
+  // Override map zoom
+  var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+    this.setZoom(14)
+    google.maps.event.removeListener(boundsListener)
+  })
 }
 
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      createMarker(results[i]);
-    }
-  }
-}
+$(document).ready(function() {
+
+  // Place JavaScript code here...
+
+});
+
+// function locationSuccess(position) {
+//   console.log('Location success')
+//   var current = {lat: position.coords.latitude, lng: position.coords.longitude};
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 17,
+//     center: current
+//   });
+//
+//   var marker = new google.maps.Marker({
+//     position: current,
+//     map: map
+//   });
+//
+//   var contentString = '<div>' + marker.getPosition() + '</div>'
+//   infowindow = new google.maps.InfoWindow({
+//     content: contentString
+//   })
+//   console.log(marker.getPosition(), 'getposition')
+//   console.log(marker.position, 'position')
+//   marker.addListener('click', function() {
+//     infowindow.open(map, marker);
+//   });
+// }
+//
+//
+// var service;
+// var infowindow;
+//
+// function initialize() {
+//   var searchlocation = map.LatLng();
+//
+//   var request = {
+//     location: searchlocation,
+//     radius: '500',
+//     query: 'restaurant'
+//   };
+//
+//   service = new google.maps.places.PlacesService(map);
+//   service.textSearch(request, callback);
+// }
+//
+// function callback(results, status) {
+//   if (status == google.maps.places.PlacesServiceStatus.OK) {
+//     for (var i = 0; i < results.length; i++) {
+//       var place = results[i];
+//       createMarker(results[i]);
+//     }
+//   }
+// }
 
   // var contentString = '<div id="content">'+
   //     '<div id="siteNotice">'+
@@ -79,22 +149,12 @@ function callback(results, status) {
   // });
 
 
-function locationError() {
-  console.log('Cound not get location')
-}
+// function locationError() {
+//   console.log('Cound not get location')
+// }
 
 
-// Get user location
-function initMap() {
-  navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 
-}
-
-$(document).ready(function() {
-
-  // Place JavaScript code here...
-
-});
 
 //---------------------------------------------------------------------------------
 
