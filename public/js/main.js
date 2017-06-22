@@ -72,6 +72,14 @@ function initMap() {
             data: data,
             success: function() {
               console.log('bookmark created')
+              $.ajax({
+                method: "GET",
+                url: "/bookmarks",
+                success: function(data) {
+                  $('#overlay1 p').remove()
+                  $('#overlay1').append('<p>' +JSON.stringify(data) + '</p>')
+                }
+              })
             }
           })
         })
@@ -90,8 +98,40 @@ function initMap() {
   })
 }
 
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/bookmarks",
+    success: function(data) {
+      $('#overlay1').append('<p>' +JSON.stringify(data) + '</p>')
+    }
+  })
+})
 
+    /* Create product Row */
+    function createProductRow(bookmarks){
 
+      // Setup template
+      var tpl = $('#bookmarkRowTpl').html();
+      tpl = tpl.replace('{{Id}}', restaurant.id);
+      tpl = tpl.replace('{{Name}}', restaurant.name);
+      tpl = tpl.replace('{{Address}}', restaurant.formatted_address);
+
+      // Append the row
+      $('#overlay1 > div').append(tpl);
+    }
+
+    function deleteBookmark(productRow){
+      //$(productRow).remove();
+      var id = $(productRow).data('id');
+      console.log(id);
+    }
+
+    $('#overlay1').on('click', '.delete', function(event){
+      var productRow = $(event.target).parents('.product')[0];
+      deleteBookmark(productRow);
+      calculateGrandTotal();
+    });
 
 
 

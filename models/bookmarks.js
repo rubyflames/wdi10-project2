@@ -6,7 +6,7 @@ const restaurant = require('./restaurant');
 const Schema = mongoose.Schema;
 //const User = require ('./User');
 
-const bookmarks = new mongoose.Schema({
+const bookmarkSchema = new mongoose.Schema({
   user: String,
   // ^ to ref mongoDB reference of the user
   restaurant: String,
@@ -16,4 +16,6 @@ const bookmarks = new mongoose.Schema({
 
 });
 
-module.exports = bookmarks;
+const Bookmark = mongoose.model('Bookmark', bookmarkSchema)
+
+module.exports = Bookmark;
