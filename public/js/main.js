@@ -58,11 +58,12 @@ function initMap() {
         bookmarkButtons.addEventListener('click', function(e){
           console.log(e.target.previousSibling.innerHTML)
           var data = {
-            user: "test",
-            restaurant_id: "1",
+            // user: "test",
+            // restaurant_id: "1",
             name: e.target.previousSibling.previousSibling.innerHTML,
             formatted_address: e.target.previousSibling.innerHTML
           }
+          var obj = JSON.parse(data)
           $.ajax({
             method: "POST",
             url: "/createBookmark",
@@ -78,6 +79,8 @@ function initMap() {
                 success: function(data) {
                   $('#overlay1 p').remove()
                   $('#overlay1').append('<p>' +JSON.stringify(data) + '</p>')
+                  // $.each(data.items,function(i,item)
+                  // $('#overlay1').append(obj.innerText.name + " " + obj.innerText.formatted_address)
                 }
               })
             }
@@ -87,51 +90,93 @@ function initMap() {
       }
     })(marker, i))
 
+//     (function() {
+//   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+//   $.getJSON( flickerAPI, {
+//     tags: "mount rainier",
+//     tagmode: "any",
+//     format: "json"
+//   })
+//     .done(function( data ) {
+//       $.each( data.items, function( i, item ) {
+//         $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+//         if ( i === 3 ) {
+//           return false;
+//         }
+//       });
+//     });
+// })();
+
     // automatically center map to fit all markers
     map.fitBounds(bounds)
   }
 
   // Override map zoom
   var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-    this.setZoom(14)
+    this.setZoom(12)
     google.maps.event.removeListener(boundsListener)
   })
 }
+
+
+/* Create product Row */
+function createBookmarkRow(bookmarks){
+
+  // Setup template
+  var tpl = $('#bookmarkRowTpl').html();
+  tpl = tpl.replace('{{Id}}', restaurant.id);
+  tpl = tpl.replace('{{Name}}', restaurant.name);
+  tpl = tpl.replace('{{Address}}', restaurant.formatted_address);
+
+  // Append the row
+  $('#overlay1 > #bookmarkRowTpl').append(tpl);
+  // <button type="button" class="btn btn-danger">Remove</button>
+//   $('#overlay1 > div').append(tpl + '<button type="button" class="btn btn-danger">Remove</button>');
+ }
+
+/* Delete product Row */
+function deleteBookmark(nommarkRow){
+  //$(productRow).remove();
+  var id = $(nommarkRow).data('id');
+  console.log(id);
+  id.remove();
+}
+
 
 $(() => {
   $.ajax({
     method: "GET",
     url: "/bookmarks",
     success: function(data) {
-      $('#overlay1').append('<p>' +JSON.stringify(data) + '</p>')
+      console.log(data)
+      for (var i = 0; i < data.length; i++) {
+        $('#overlay1').append(
+          '<ul>' +
+            '<li>'+ data[i].name + '</li>'+
+            '<li>'+ data[i].formatted_address + '</li>'+
+            '<li style="display:none;">'+ data[i]._id + '</li>'+
+          '</ul>')
+      }
+
+
+      // var obj = JSON.parse(data);
+      // $('#overlay1').append(obj.innerText)}
+      //
+      // for (i=0,i<bookmarkslist.length,i++) {
+      //   document.getElementById('bookmarkRowTpl').inerHTML = obj[i].name + " " + obj[i].formatted_address
+      // }
+
     }
   })
+
+
+      $('#overlay1').on('click', '.delete', function(event){
+        var nommarkRow = $(event.target).parents('.nommark')[0];
+        deleteBookmark(nommarkRow);
+      });
 })
 
-    /* Create product Row */
-    function createProductRow(bookmarks){
 
-      // Setup template
-      var tpl = $('#bookmarkRowTpl').html();
-      tpl = tpl.replace('{{Id}}', restaurant.id);
-      tpl = tpl.replace('{{Name}}', restaurant.name);
-      tpl = tpl.replace('{{Address}}', restaurant.formatted_address);
-
-      // Append the row
-      $('#overlay1 > div').append(tpl);
-    }
-
-    function deleteBookmark(productRow){
-      //$(productRow).remove();
-      var id = $(productRow).data('id');
-      console.log(id);
-    }
-
-    $('#overlay1').on('click', '.delete', function(event){
-      var productRow = $(event.target).parents('.product')[0];
-      deleteBookmark(productRow);
-      calculateGrandTotal();
-    });
 
 
 

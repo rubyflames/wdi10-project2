@@ -132,6 +132,9 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', restaurantController.getAll);
 app.post('/createBookmark', bookmarkslistController.create);
 app.get('/bookmarks', bookmarkslistController.getAll);
+
+app.delete('/:id', bookmarkslistController.delete);
+
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);

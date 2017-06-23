@@ -7,14 +7,14 @@ block content
     #overlay1.col-sm-3
       h3 Your Saved Noms
       #bookmarkRowTpl
-        .row.product(data-id='{{Id}}')
+        .row.nommark(data-id='{{Id}}')
           .col-md-3.eateryname {{Name}}
           .col-md-3.address {{Address}}
           .form-group
             label(for='Notes') Notes
-            input#color.form-control(type='text', placeholder='My Comments')
-          .col-md-1.delete
-            button.btn.btn-danger(type='button') Delete
+              input#color.form-control(type='text', placeholder='My Comments')
+      .col-md-1.delete
+        button.btn.btn-danger(type='button') Delete
     #overlay2.col-sm-offset-3.col-sm-6
       h3 NOM-ADD: Add Now, Nom Later
       #custom-search-input
