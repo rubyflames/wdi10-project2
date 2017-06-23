@@ -137,41 +137,49 @@ function createBookmarkRow(bookmarks){
 /* Delete product Row */
 function deleteBookmark(nommarkRow){
   //$(productRow).remove();
-  var id = $(nommarkRow).data('id');
-  console.log(id);
-  id.remove();
+  nommarkRow.remove();
 }
 
 
 $(() => {
-  $.ajax({
-    method: "GET",
-    url: "/bookmarks",
-    success: function(data) {
-      console.log(data)
-      for (var i = 0; i < data.length; i++) {
-        $('#overlay1').append(
-          '<ul>' +
-            '<li>'+ data[i].name + '</li>'+
-            '<li>'+ data[i].formatted_address + '</li>'+
-            '<li style="display:none;">'+ data[i]._id + '</li>'+
-          '</ul>')
+  // var user;
+//   $.ajax({
+//     method: "GET",
+//     url: "api/user_data",
+//     success: function(data) {
+//       // Make sure the data contains the username as expected before using it
+//       if (data.hasOwnProperty('username')) {
+//           console.log('User is logged in ');
+//           user = data.username
+//           console.log(user)
+//       }
+//   }
+// });
+var user = $('#user').text()
+  if (user) {
+    $.ajax({
+      method: "GET",
+      url: "/bookmarks",
+      success: function(data) {
+        console.log(data)
+        for (var i = 0; i < data.length; i++) {
+          $('#overlay1').append(
+            '<ul class="nomListItem">' +
+              '<h4>'+ data[i].name + '</h4>'+
+              '<li>'+ data[i].formatted_address + '</li>'+
+              '<li style="display:none;">'+ data[i]._id + '</li>'+
+            '</ul>')
+        }
+
       }
+    })
+  }
 
-
-      // var obj = JSON.parse(data);
-      // $('#overlay1').append(obj.innerText)}
-      //
-      // for (i=0,i<bookmarkslist.length,i++) {
-      //   document.getElementById('bookmarkRowTpl').inerHTML = obj[i].name + " " + obj[i].formatted_address
-      // }
-
-    }
-  })
 
 
       $('#overlay1').on('click', '.delete', function(event){
-        var nommarkRow = $(event.target).parents('.nommark')[0];
+        var nommarkRow = $(event.target).parents('#overlay1').find('.nomListItem')[0];
+        console.log(nommarkRow)
         deleteBookmark(nommarkRow);
       });
 })

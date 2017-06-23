@@ -132,8 +132,16 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', restaurantController.getAll);
 app.post('/createBookmark', bookmarkslistController.create);
 app.get('/bookmarks', bookmarkslistController.getAll);
-
 app.delete('/:id', bookmarkslistController.delete);
+app.get('/api/user_data', function(req, res) {
+
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.json({message:'user not logged in'});
+            } else {
+                res.send(req.user)
+            }
+        });
 
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
